@@ -45,18 +45,18 @@ and on the ActiveRecord side
 
 you'll need to specify the association class and sometimes the foreign key (in `has_*` associations)
 
-  class Picture
-    include Mongoid::Document
-    include MongoMysqlRelations
+    class Picture
+      include Mongoid::Document
+      include MongoMysqlRelations
 
-    to_mysql_belongs_to :user, :class => User
-  end
+      to_mysql_belongs_to :user, :class => User
+    end
 
-  class User < ActiveRecord::Base
-    include MongoMysqlRelations
+    class User < ActiveRecord::Base
+      include MongoMysqlRelations
 
-    from_mysql_has_many :pictures, :class => Picture, :foreign_key => "user_id"
-  end
+      from_mysql_has_many :pictures, :class => Picture, :foreign_key => "user_id"
+    end
 
 ## Contributing
 
