@@ -62,7 +62,7 @@ module MongoMysqlRelations
           end
 
           if self.instance_variable_get("@#{name}").blank? 
-            self.instance_variable_set("@#{name}", object_class.first(foreign_key => self.id.to_s))
+            self.instance_variable_set("@#{name}", object_class.where(foreign_key => self.id.to_s).first)
           end
 
           self.instance_variable_get("@#{name}")
@@ -82,7 +82,7 @@ module MongoMysqlRelations
           end
 
           if self.instance_variable_get("@#{name}").blank? 
-            self.instance_variable_set("@#{name}", object_class.where(object_class.primary_key => self.send("#{name}_id")).first)
+            self.instance_variable_set("@#{name}", object_class.where(:id => self.send("#{name}_id")).first)
           end
 
           self.instance_variable_get("@#{name}")
@@ -124,7 +124,7 @@ module MongoMysqlRelations
           end
 
           if self.instance_variable_get("@#{name}").blank? 
-            self.instance_variable_set("@#{name}", object_class.first(foreign_key => self.id))
+            self.instance_variable_set("@#{name}", object_class.where(foreign_key => self.id).first)
           end
 
           self.instance_variable_get("@#{name}")
